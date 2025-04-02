@@ -1,0 +1,9 @@
+#!/data/data/com.termux/files/usr/bin/python3.12
+# -*- coding: utf-8 -*-
+import os
+bit = os.uname().machine
+
+if '64' in bit:
+    import lite
+else:
+    print('TOOL NOT AVAILABLE FOR 32 BIT DEVICE')
