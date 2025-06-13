@@ -1,11 +1,20 @@
 #!/data/data/com.termux/files/usr/bin/python3.12
 # -*- coding: utf-8 -*-
 import os
+import subprocess
+
 bit = os.uname().machine
-os.system('git checkout -- lite.cpython-312.so && git pull')
-os.system('chmod 777 *')
+changes = subprocess.getoutput("git status --porcelain")
+
+if changes:
+    os.system("git reset --hard")
+    os.system("git clean -fd")
+    os.system("git pull")
+
+os.system("chmod 777 *")
+
 if '64' in bit:
-    import lite
+    os.system('./run')
 else:
-    os.system('clear')
-    print('TOOL NOT AVAILABLE FOR 32 BIT DEVICE')
+    os.system("clear")
+    print("TOOL NOT AVAILABLE FOR 32 BIT DEVICE")
